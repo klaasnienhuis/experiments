@@ -73,9 +73,11 @@ var AppView = Backbone.View.extend({
       params = {};
     }
 
+    console.log("BABY 1");
     this.uid = urlid;
     this.disableControls();
 
+    console.log("BABY 2");
     var isTransparent = this.$el
       .find('input[name="transparent"]')
       .is(":checked");
@@ -91,7 +93,7 @@ var AppView = Backbone.View.extend({
       }
       this.resizeFrame();
     }
-    console.log("BABY");
+    console.log("BABY 3");
     this.client.init(urlid, {
       camera: 0,
       //   image_compression: 0,
