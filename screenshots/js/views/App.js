@@ -80,6 +80,7 @@ var AppView = Backbone.View.extend({
       .find('input[name="transparent"]')
       .is(":checked");
 
+    console.log("isTransparent", isTransparent);
     if (params.width || params.height) {
       if (params.width) {
         this.$el.find('input[name="width"]').val(params.width);
@@ -90,14 +91,15 @@ var AppView = Backbone.View.extend({
       }
       this.resizeFrame();
     }
-
+    console.log("BABY");
     this.client.init(urlid, {
       camera: 0,
-      image_compression: 0,
-      internal: 1,
-      overrideDevicePixelRatio: 1,
+      //   image_compression: 0,
+      //   internal: 1,
+      //   overrideDevicePixelRatio: 1,
       transparent: isTransparent ? 1 : 0,
       success: function onSuccess(api) {
+        console.log("api", api);
         this.api = api;
         api.start();
         api.addEventListener(
