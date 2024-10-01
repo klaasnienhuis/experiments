@@ -67,6 +67,8 @@ var AppView = Backbone.View.extend({
   },
 
   initViewer: function (urlid, params) {
+    console.log("urlid", urlid);
+    console.log("params", params);
     if (typeof params === "undefined") {
       params = {};
     }
@@ -134,6 +136,7 @@ var AppView = Backbone.View.extend({
   },
 
   onViewerReady: function () {
+    console.log("Ready");
     this._sceneView.setApi(this.api);
     this._screenshotView.setApi(this.api);
     this.enableControls();
