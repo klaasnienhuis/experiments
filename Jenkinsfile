@@ -33,7 +33,7 @@ properties([
 if (env.BRANCH_NAME == 'master') {
 
     def ENV = 'prod'
-    def domain = 'labs.sketchfab.com'
+    def domain = 'klaasnienhuis.github.io'
 
     node(ENV + '-deployer') {
         checkout scm
