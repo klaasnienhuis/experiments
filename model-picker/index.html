@@ -55,13 +55,10 @@ button.addEventListener('click', function(){
         success: function(model) {
             console.log(model);
             var out = document.querySelector('.result');
-            out.innerHTML = JSON.stringify( model, null, 4);
+            out.appendChild(document.createTextNode(JSON.stringify(model, null, 4)));
         }
     });
 });
-</script>
-<script type="text/javascript">
-
 </script>
 </body>
 </html>
