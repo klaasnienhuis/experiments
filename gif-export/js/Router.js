@@ -10,11 +10,18 @@ var Router = Backbone.Router.extend( {
         this.appView = options.appView;
     },
 
-    index: function () {
-
-    },
+    index: function () {},
 
     screenshot: function ( urlid ) {
-        this.appView.initViewer( urlid, false );
+        var uidRegex = /^[0-9a-zA-Z]{27,32}$/;
+
+        if (!urlid.match(uidRegex)) {
+            window.console.log('Invalid model UID in URL hash:', urlid);
+            return;
+        }
+
+        window.console.log('Loading model UID:', urlid);
+
+        this.appView.initViewer(urlid, false);
     }
 } );
