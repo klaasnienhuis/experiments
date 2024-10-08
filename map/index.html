@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Sketchfab Map</title>
-    <link rel="stylesheet" href="styles/app.css" media="screen" title="no title" charset="utf-8">
-    <link rel="stylesheet" href="js/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="./styles/app.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="./js/leaflet/leaflet.css" />
 </head>
 
 <body>
@@ -12,7 +12,7 @@
         <div class="sidebar">
             <div class="models">
                 <div class="models-header">
-                    Models tagged "meta_geo" <a href="howto.html">(How to geotag your models)</a>
+                    Models tagged "meta_geo" <a href="./howto.html">(How to geotag your models)</a>
                 </div>
                 <ul>
                 </ul>
@@ -32,39 +32,29 @@
         </div>
     </div>
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.11.1/lodash.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.3.0/showdown.js"></script>
-<script src="js/leaflet/leaflet.js"></script>
-<script type="text/javascript" src="js/sketchfab-sdk.2.1.1.js"></script>
-<script type="text/javascript" src="js/latlon-geohash.js"></script>
+<script src="./js/leaflet/leaflet.js"></script>
+<script type="text/javascript" src="./js/latlon-geohash.js"></script>
 
 <script>
 
-var list = document.querySelector('.models');
-var map = document.querySelector('.map');
+const list = document.querySelector('.models');
+const map = document.querySelector('.map');
 
-var App = {
-    sketchfabSDK: new SketchfabSDK(),
-    markdownParser: new showdown.Converter(),
-    map: initMap(),
+const App = {
+    map: null,
     markers: [],
 };
 
-var state = {
+const state = {
     models: [],
-    next: null
-}
+    next: null,
+    currentModelUID: null
+};
 
-var tiles;
-var markerLayer;
-var newMarkerLayer;
-var newMarker;
-
-var newIcon = L.icon({
-    iconUrl: 'js/leaflet/images/marker-icon-green.png',
-    iconRetinaUrl: 'js/leaflet/images/marker-icon-green-2x.png',
-    shadowUrl: 'js/leaflet/images/marker-shadow.png',
+const newIcon = L.icon({
+    iconUrl: './js/leaflet/images/marker-icon-green.png',
+    iconRetinaUrl: './js/leaflet/images/marker-icon-green-2x.png',
+    shadowUrl: './js/leaflet/images/marker-shadow.png',
 
     iconSize:     [25, 41],
     shadowSize:   [41, 41],
@@ -73,13 +63,18 @@ var newIcon = L.icon({
     popupAnchor:  [0, -41]
 });
 
-function initMap() {
+let tiles;
+let markerLayer;
+let newMarkerLayer;
+let newMarker;
+
+const initMap = () => {
 
     tiles = {
-        map: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+        map: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
             attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
         }),
-        satellite: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        satellite: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     	       attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
         })
     };
@@ -87,19 +82,19 @@ function initMap() {
     markerLayer = L.layerGroup();
     newMarkerLayer = L.layerGroup();
 
-    var mymap = L.map('map', {
+    const mymap = L.map('map', {
         layers: [
             tiles.satellite,
             tiles.map,
         ]
     }).setView([50, 0], 5);
 
-    var baseMaps = {
+    const baseMaps = {
         "Satellite": tiles.satellite,
         "Map": tiles.map,
     };
 
-    var layerControl = L.control.layers(baseMaps, null, {
+    const layerControl = L.control.layers(baseMaps, null, {
         collapsed: false
     });
 
@@ -108,13 +103,13 @@ function initMap() {
     mymap.addLayer(markerLayer);
     mymap.addLayer(newMarkerLayer);
     return mymap;
-}
+};
 
-function getLatLon(model) {
-    var longestHash = '';
-    var currentTag;
+const getLatLon = (model) => {
+    let longestHash = '';
+    let currentTag;
 
-    for (var i=0; i<model.tags.length; i++) {
+    for (let i = 0; i < model.tags.length; i++) {
         currentTag = model.tags[i].name;
         if (currentTag.indexOf('geo_') === 0 && currentTag.length > longestHash.length && currentTag.length <= 16) {
             longestHash = currentTag.replace('geo_', '');
@@ -123,173 +118,166 @@ function getLatLon(model) {
 
     if (longestHash !== '') {
         try {
-            var latlon = Geohash.decode(longestHash);
+            const latlon = Geohash.decode(longestHash);
             return latlon;
-        } catch( e ) {
+        } catch(e) {
             console.error(e.message, longestHash, model.uid);
         }
     } else {
         return false;
     }
-}
+};
 
-function getModelByUid(uid) {
-    return _.find(state.models, {uid: uid});
-}
+const getModelByUid = (uid) => state.models.find(model => model.uid === uid);
 
-function fetchModels() {
-    var url = 'https://api.sketchfab.com/v3/models?sort_by=-createdAt&tags=meta_geo';
-    var promise = $.get(url);
-    promise.then(onFetchSuccess);
-}
+const fetchModels = () => {
+    const url = 'https://api.sketchfab.com/v3/models?sort_by=-createdAt&tags=meta_geo';
+    fetch(url)
+        .then(response => response.json())
+        .then(data => onFetchSuccess(data));
+};
 
 
-function loadMore() {
+const loadMore = () => {
     if (state.next) {
-        var url = 'https://api.sketchfab.com/v3/models?sort_by=-createdAt&tags=meta_geo&cursor=' + state.next;
-        var promise = $.get(url);
-        promise.then(onFetchSuccess);
+        const url = `https://api.sketchfab.com/v3/models?sort_by=-createdAt&tags=meta_geo&cursor=${state.next}`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => onFetchSuccess(data));
     } else {
         alert('Nothing to load');
     }
-}
+};
 
-function onFetchSuccess(response) {
+const onFetchSuccess = (response) => {
     state.next = response.cursors.next;
-    state.models = state.models.concat(response.results.map(function(model){
-        return _.extend(model, {
-            geo: getLatLon(model)
-        });
-    }));
+
+    for (let model of response.results) {
+        model.geo = getLatLon(model);
+        if (model.geo) {
+            state.models.push(model);
+        }
+    }
 
     if (!state.next) {
-        $('.models-more').hide();
+        document.querySelector('.models-more').style.display = 'none';
     } else {
-        $('.models-more').show();
+        document.querySelector('.models-more').style.display = '';
     }
 
     renderModels();
     renderMarkers();
-}
+};
 
-function renderMarker(model) {
+const renderMarker = (model) => {
     if (model.geo) {
-        var marker = L.marker([model.geo.lat, model.geo.lon]);
-        marker.on('click', function(){
-            selectModel(model.uid);
-        });
+        const marker = L.marker([model.geo.lat, model.geo.lon]);
+        marker.on('click', () => selectModel(model.uid));
         marker.addTo(markerLayer);
         return marker;
     } else {
         return false;
     }
-}
+};
 
-function renderMarkers() {
+const renderMarkers = () => {
     App.markers = state.models.map(renderMarker);
-}
+};
 
-function renderModel(model) {
-    var thumbs = _.sortBy(_.clone(model.thumbnails.images), 'width');
+const escapeHtml = (html) => {
+    return html
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+ };
 
-    var tpl = _.template([
-        '<li class="model" data-id="<%= model.uid %>">',
-            '<a href="<%= model.viewerUrl %>">',
-                '<div class="model-image">',
-                    '<img src="<%= mainImage %>" alt="" width="64" height="64">',
-                '</div>',
-                '<div class="model-info">',
-                    '<span class="model-name"><%= model.name %></span> ',
-                    '<span class="model-author">by <%= model.user.displayName %></span>',
-                '</div>',
-            '</a>',
-        '</li>'
-    ].join(''));
-
-    return tpl({
-        model: model,
-        mainImage: thumbs[2].url
+const renderModel = (model) => {
+    const thumbnails = model.thumbnails.images.sort((a, b) => {
+        if (a.width < b.width) return -1;
+        if (a.width > b.width) return 1;
+        return 0;
     });
-}
 
-function renderModels() {
-    var li = state.models.map(renderModel);
-    $('.models ul').html(li.join(''));
-}
+    const thumbnailURL = thumbnails[1].url;
 
-function selectModel(uid) {
-    var model = getModelByUid(uid);
+    return [
+            `<li class="model" data-id="${model.uid}">`,
+                `<a href="${model.viewerUrl}">`,
+                    '<div class="model-image">',
+                        `<img src="${thumbnailURL}" alt="" width="114" height="64">`,
+                    '</div>',
+                    '<div class="model-info">',
+                        `<span class="model-name">${escapeHtml(model.name)}</span>`,
+                        `<span class="model-author">by ${escapeHtml(model.user.displayName)}</span>`,
+                    '</div>',
+                '</a>',
+            '</li>'
+        ].join('');
+};
+
+const renderModels = () => {
+    const modelList = state.models.map(renderModel);
+    document.querySelector('.models ul').innerHTML = modelList.join('');
+};
+
+const selectModel = (uid) => {
+    if (uid === state.currentModelUID) return;
+
+    state.currentModelUID = uid;
+    const model = getModelByUid(uid);
 
     if (model.geo) {
         App.map.panTo([model.geo.lat, model.geo.lon]);
     }
 
-    var tpl = _.template([
+    const viewer = document.querySelector('.viewer');
+
+    const html = [
         '<div class="viewer-info">',
             '<div class="viewer-header">',
                 '<div><button class="back" title="Back"><img src="images/arrow-left-c.svg"> Back</button></div>',
-                '<h1><a href="<%= model.viewerUrl %>"><%= model.name %></a></h1>',
-                '<div class="viewer-meta">by <%= model.user.displayName %></div>',
+                `<h1><a href="${model.viewerUrl}">${escapeHtml(model.name)}</a></h1>`,
+                `<div class="viewer-meta">by ${escapeHtml(model.user.displayName)}</div>`,
             '</div>',
             '<div class="ratio16-9">',
                 '<div class="ratio-inner">',
-                    '<iframe src="<%= model.embedUrl %>" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>',
+                    `<iframe src="${model.embedUrl}" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>`,
                 '</div>',
             '</div>',
-            '<div class="viewer-description"><%= htmlDescription %></div>',
+            `<div class="viewer-description">${escapeHtml(model.description)}</div>`,
         '</div>'
-    ].join(''));
+    ].join('');
 
-    var htmlDescription = App.markdownParser.makeHtml(model.description);
-    var out = tpl({
-        model: model,
-        htmlDescription: htmlDescription
-    });
-
-    $('.viewer').addClass('active');
-    setTimeout(function(){
-        $('.viewer').html(out);
+    viewer.classList.add('active');
+    setTimeout(() => {
+        viewer.innerHTML = html;
     }, 300);
-}
+};
 
-function unselectModel() {
-    $('.viewer').removeClass('active');
-    setTimeout(function(){
-        $('.viewer').html('');
+const unselectModel = () => {
+    state.currentModelUID = null;
+    const viewer = document.querySelector('.viewer');
+    viewer.classList.remove('active');
+    setTimeout(() => {
+        viewer.innerHTML = '';
     }, 500);
-}
+};
 
-function setNewMarker(lat, lon) {
-    var hash = Geohash.encode(lat, lon);
-    var tags = [
-        'geo_' + hash,
-    ].join(', ');
-    var indexingTags = [
-        'geo_' + hash.substr(0,1),
-        'geo_' + hash.substr(0,2),
-        'geo_' + hash.substr(0,3),
-        'geo_' + hash.substr(0,4),
-        'geo_' + hash.substr(0,5),
-    ].join(', ');
+const setNewMarker = (lat, lon) => {
+    const hash = Geohash.encode(lat, lon);
+    const tag = `geo_${hash}`;
 
-    var tpl = _.template([
+    const content = [
         'Coordinates:<br>',
-        '<%= geo.lat %>, <%= geo.lon %><br>',
+        `${lat}, ${lon}<br>`,
         '<br>',
         '<b>How to add your model to this location</b><br>',
         'Add the following tags to your model info:<br>',
         '<code>meta_geo</code><br>',
-        '<code><%= tags %></code><br>',
-    ].join(''));
-
-    var content = tpl({
-        geo: {
-            lat: lat,
-            lon: lon
-        },
-        tags: tags,
-        indexingTags: indexingTags
-    });
+        `<code>${tag}</code><br>`,
+    ].join('');
 
     if (!newMarker) {
         newMarker = L.marker([lat, lon], {icon: newIcon});
@@ -303,50 +291,55 @@ function setNewMarker(lat, lon) {
         newMarker.openPopup();
     }
 
-}
+};
 
-function init() {
+const init = () => {
     fetchModels();
+    App.map = initMap();
 
-    $('.models ul').on('click', '.model', function(e) {
+    const delegateTargetNode = (e, elementSelector, handler) => {
+        for (let target = e.target; target && target != this; target = target.parentNode) {
+            if (target.matches(elementSelector)) {
+                handler(target);
+                break;
+            }
+        }
+    };
+
+    document.querySelector('.models ul').addEventListener('click', (e) => {
         e.preventDefault();
-        var target = $(e.currentTarget);
-        var uid = target.attr('data-id');
-        selectModel(uid);
-    });
+        delegateTargetNode(e, '.model', (target) => {
+            const uid = target.getAttribute('data-id');
+            selectModel(uid);
+        });
+    }, false);
 
-    $('.models-more button').on('click', function(e){
+    document.querySelector('.models-more button').addEventListener('click', (e) =>{
         e.preventDefault();
         loadMore();
     });
 
-    $('.viewer').on('click', '.back', function(e){
+    document.querySelector('.viewer').addEventListener('click', (e) =>{
         e.preventDefault();
-        unselectModel();
+        delegateTargetNode(e, '.back', unselectModel);
     });
 
-    $('.map__search').on('click', function(e){
+    document.querySelector('.map__search').addEventListener('click', (e) =>{
         e.preventDefault();
-        var value = window.prompt('Enter coordinates (latitude and longitude separated by comma)');
+        const value = window.prompt('Enter coordinates (latitude and longitude separated by comma)');
         if (value) {
-            var coordinates = value.split(',').map(function(value){
-                return parseFloat(value);
-            });
+            const coordinates = value.split(',').map((value) => parseFloat(value));
             if (coordinates.length === 2) {
                 setNewMarker(coordinates[0], coordinates[1]);
             }
         }
     });
 
-    App.map.on('dblclick', function(e){
-        setNewMarker(e.latlng.lat, e.latlng.lng);
-    });
-}
+    App.map.on('dblclick', (e) => setNewMarker(e.latlng.lat, e.latlng.lng));
+};
 
 init();
 
 </script>
-
-
 </body>
 </html>
