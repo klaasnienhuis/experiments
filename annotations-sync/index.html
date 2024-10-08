@@ -85,8 +85,44 @@
     </div>
 </div>
 
-<script type="text/javascript" src="https://static.sketchfab.com/api/sketchfab-viewer-1.0.0.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
 
+<script type="text/javascript">
+        const iframe = document.getElementById('api-frame');
+        const version = '1.12.1';
+        const urlid = 'd6f31e3957a144a2ab23871a26373a2a';
+        const client = new Sketchfab(version, iframe);
+        let api;
+        let currentAnnotation;
+
+        const render = () => {
+            if (currentAnnotation) {
+                const current = 'annotation-' + currentAnnotation;
+                document.querySelector('.slide.active').classList.remove('active');
+                document.getElementById(current).classList.add('active');
+            }
+        };
+
+        client.init(urlid, {
+            autostart: 1,
+            ui_infos: 0,
+            ui_watermark: 0,
+            ui_settings: 0,
+            ui_vr: 0,
+            ui_inspector: 0,
+            ui_stop: 0,
+            success: (apiClient) => {
+                api = apiClient;
+                api.addEventListener('viewerready', () => {
+                        // Update the current annotation when the annotation changes
+                        api.addEventListener('annotationSelect', (index) => {
+                            currentAnnotation = 1 + index;
+                            render();
+                        });
+                });
+            },
+            error: () => window.console.log('Error while initializing the viewer')
+        });
+</script>
 </body>
 </html>
