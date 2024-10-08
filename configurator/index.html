@@ -8,7 +8,6 @@
     <link rel="stylesheet" type="text/css" href="style/app.css">
 
     <script type="text/javascript" src="https://static.sketchfab.com/api/sketchfab-viewer-1.1.0.js"></script>
-
 </head>
 
 <body>
@@ -31,7 +30,7 @@
                 <p>This is an example of a 3D product configurator made with the Sketchfab Viewer API in JavaScript.</p>
                 <ul>
                     <li>
-                        <a href="https://github.com/sketchfab/experiments/tree/master/configurator">Source code</a>
+                        <a href="https://github.com/sketchfab/experiments/tree/master/configurator" target="_blank" rel="noopener noreferrer nofollow">Source code</a>
                     </li>
                     <li>
                         <a href="https://sketchfab.com/developers/viewer">API documentation</a>
@@ -48,6 +47,15 @@
                 results = regex.exec(location.search);
             return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
         }
+
+        function escapeHtml(html) {
+            return html
+                 .replace(/&/g, "&amp;")
+                 .replace(/</g, "&lt;")
+                 .replace(/>/g, "&gt;")
+                 .replace(/"/g, "&quot;")
+                 .replace(/'/g, "&#039;");
+         }
 
         var iframe = document.getElementById('api-frame');
         var url = getParameterByName('urlid');
@@ -111,7 +119,7 @@
                         if (isOptionObject) {
                             this.options.push({
                                 id: node.instanceID,
-                                name: node.name,
+                                name: escapeHtml(node.name),
                                 selected: false
                             });
                         }
@@ -135,7 +143,7 @@
                     }
                 }
             }
-        }
+        };
 
         var UI = {
             config: null,
@@ -196,7 +204,7 @@
                 }).join('');
                 this.el.innerHTML = '<select name="color">' + html + '</select>';
             }
-        }
+        };
 
         Configurator.init(CONFIG, iframe);
     </script>
