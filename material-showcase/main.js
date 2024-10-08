@@ -1,4 +1,4 @@
-(function() {
+(function () {
   "use strict";
 
   // globals
@@ -7,112 +7,112 @@
   var model =
     "https://sketchfab.com/models/93166cb1877f4895a91411334460898b/embed?material_showcase=1&autostart=1";
   var materials = {
-    "Couch": [
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Couch/Thumbnail.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Couch/couch_Ambient_Occlusion.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Couch/couch_Base_Color.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Couch/couch_Metallic.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Couch/couch_Normal.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Couch/couch_Roughness.jpg"
+    Couch: [
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Couch/Thumbnail.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Couch/couch_Ambient_Occlusion.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Couch/couch_Base_Color.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Couch/couch_Metallic.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Couch/couch_Normal.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Couch/couch_Roughness.jpg",
     ],
-    "CrakedGroundTiles": [
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/CrakedGroundTiles/CrackedGroundTiles_Ambient_Occlusion.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/CrakedGroundTiles/CrackedGroundTiles_Base_Color.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/CrakedGroundTiles/CrackedGroundTiles_Metallic.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/CrakedGroundTiles/CrackedGroundTiles_Normal.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/CrakedGroundTiles/CrackedGroundTiles_Roughness.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/CrakedGroundTiles/Thumbnail.jpg"
+    CrakedGroundTiles: [
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/CrakedGroundTiles/CrackedGroundTiles_Ambient_Occlusion.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/CrakedGroundTiles/CrackedGroundTiles_Base_Color.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/CrakedGroundTiles/CrackedGroundTiles_Metallic.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/CrakedGroundTiles/CrackedGroundTiles_Normal.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/CrakedGroundTiles/CrackedGroundTiles_Roughness.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/CrakedGroundTiles/Thumbnail.jpg",
     ],
-    "Crocodile_Skin": [
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Crocodile_Skin/Thumbnail.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Crocodile_Skin/crocodile_skin_Ambient_Occlusion.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Crocodile_Skin/crocodile_skin_Base_Color.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Crocodile_Skin/crocodile_skin_Metallic.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Crocodile_Skin/crocodile_skin_Normal.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Crocodile_Skin/crocodile_skin_Roughness.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Crocodile_Skin/crocodile_skin_Specular.jpg"
+    Crocodile_Skin: [
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Crocodile_Skin/Thumbnail.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Crocodile_Skin/crocodile_skin_Ambient_Occlusion.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Crocodile_Skin/crocodile_skin_Base_Color.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Crocodile_Skin/crocodile_skin_Metallic.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Crocodile_Skin/crocodile_skin_Normal.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Crocodile_Skin/crocodile_skin_Roughness.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Crocodile_Skin/crocodile_skin_Specular.jpg",
     ],
-    "Fallen_Painted_metal": [
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Fallen_Painted_metal/Fallen_Painted_Metal_Base_Color.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Fallen_Painted_metal/Fallen_Painted_Metal_Metallic.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Fallen_Painted_metal/Fallen_Painted_Metal_Normal.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Fallen_Painted_metal/Fallen_Painted_Metal_Roughness.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Fallen_Painted_metal/Thumbnail.jpg"
+    Fallen_Painted_metal: [
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Fallen_Painted_metal/Fallen_Painted_Metal_Base_Color.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Fallen_Painted_metal/Fallen_Painted_Metal_Metallic.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Fallen_Painted_metal/Fallen_Painted_Metal_Normal.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Fallen_Painted_metal/Fallen_Painted_Metal_Roughness.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Fallen_Painted_metal/Thumbnail.jpg",
     ],
-    "Metal_Cooper": [
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Cooper/Thumbnail.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Cooper/metal_brushed_copper_Base_Color.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Cooper/metal_brushed_copper_Metallic.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Cooper/metal_brushed_copper_Normal.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Cooper/metal_brushed_copper_Roughness.jpg"
+    Metal_Cooper: [
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Cooper/Thumbnail.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Cooper/metal_brushed_copper_Base_Color.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Cooper/metal_brushed_copper_Metallic.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Cooper/metal_brushed_copper_Normal.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Cooper/metal_brushed_copper_Roughness.jpg",
     ],
-    "Metal_Floor_Base": [
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Floor_Base/MetalFloorsBare_Base_Color.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Floor_Base/MetalFloorsBare_Metallic.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Floor_Base/MetalFloorsBare_Normal.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Floor_Base/MetalFloorsBare_Roughness.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Floor_Base/Thumbnail.jpg"
+    Metal_Floor_Base: [
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Floor_Base/MetalFloorsBare_Base_Color.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Floor_Base/MetalFloorsBare_Metallic.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Floor_Base/MetalFloorsBare_Normal.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Floor_Base/MetalFloorsBare_Roughness.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Floor_Base/Thumbnail.jpg",
     ],
-    "Metal_Painted": [
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Painted/Thumbnail.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Painted/metal_painted_barrel_Ambient_Occlusion.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Painted/metal_painted_barrel_Base_Color.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Painted/metal_painted_barrel_Diffuse.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Painted/metal_painted_barrel_Glossiness.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Painted/metal_painted_barrel_Height.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Painted/metal_painted_barrel_Metallic.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Painted/metal_painted_barrel_Normal.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Painted/metal_painted_barrel_Roughness.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Painted/metal_painted_barrel_Specular.jpg"
+    Metal_Painted: [
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Painted/Thumbnail.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Painted/metal_painted_barrel_Ambient_Occlusion.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Painted/metal_painted_barrel_Base_Color.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Painted/metal_painted_barrel_Diffuse.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Painted/metal_painted_barrel_Glossiness.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Painted/metal_painted_barrel_Height.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Painted/metal_painted_barrel_Metallic.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Painted/metal_painted_barrel_Normal.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Painted/metal_painted_barrel_Roughness.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Painted/metal_painted_barrel_Specular.jpg",
     ],
-    "Metal_Rusty": [
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Rusty/",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Rusty/Thumbnail.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Rusty/metal_aircraft_interior_rusty_Base_Color.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Rusty/metal_aircraft_interior_rusty_Metallic.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Rusty/metal_aircraft_interior_rusty_Normal.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Rusty/metal_aircraft_interior_rusty_Roughness.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Metal_Rusty/metal_aircraft_interior_rusty_Specular.jpg"
+    Metal_Rusty: [
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Rusty/",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Rusty/Thumbnail.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Rusty/metal_aircraft_interior_rusty_Base_Color.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Rusty/metal_aircraft_interior_rusty_Metallic.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Rusty/metal_aircraft_interior_rusty_Normal.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Rusty/metal_aircraft_interior_rusty_Roughness.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Metal_Rusty/metal_aircraft_interior_rusty_Specular.jpg",
     ],
-    "Plastic": [
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Plastic/Thumbnail.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Plastic/plastic_base_Base_Color.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Plastic/plastic_base_Metallic.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Plastic/plastic_base_Normal.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Plastic/plastic_base_Roughness.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Plastic/plastic_base_Specular.jpg"
+    Plastic: [
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Plastic/Thumbnail.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Plastic/plastic_base_Base_Color.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Plastic/plastic_base_Metallic.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Plastic/plastic_base_Normal.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Plastic/plastic_base_Roughness.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Plastic/plastic_base_Specular.jpg",
     ],
-    "RhombusTiles": [
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/RhombusTiles/Thumbnail.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/RhombusTiles/Tiles_Ambient_Occlusion.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/RhombusTiles/Tiles_Base_Color.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/RhombusTiles/Tiles_Metallic.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/RhombusTiles/Tiles_Normal.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/RhombusTiles/Tiles_Roughness.jpg"
+    RhombusTiles: [
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/RhombusTiles/Thumbnail.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/RhombusTiles/Tiles_Ambient_Occlusion.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/RhombusTiles/Tiles_Base_Color.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/RhombusTiles/Tiles_Metallic.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/RhombusTiles/Tiles_Normal.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/RhombusTiles/Tiles_Roughness.jpg",
     ],
-    "Stylized_Ice": [
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Stylized_Ice/Thumbnail.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Stylized_Ice/ice_stylized_Base_Color.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Stylized_Ice/ice_stylized_Metallic.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Stylized_Ice/ice_stylized_Normal.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Stylized_Ice/ice_stylized_Roughness.jpg"
+    Stylized_Ice: [
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Stylized_Ice/Thumbnail.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Stylized_Ice/ice_stylized_Base_Color.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Stylized_Ice/ice_stylized_Metallic.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Stylized_Ice/ice_stylized_Normal.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Stylized_Ice/ice_stylized_Roughness.jpg",
     ],
-    "Watermelon": [
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Watermelon/Thumbnail.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Watermelon/Watermelon_Ambient_Occlusion.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Watermelon/Watermelon_Base_Color.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Watermelon/Watermelon_Height.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Watermelon/Watermelon_Metallic.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Watermelon/Watermelon_Normal.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Watermelon/Watermelon_Roughness.jpg"
+    Watermelon: [
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Watermelon/Thumbnail.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Watermelon/Watermelon_Ambient_Occlusion.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Watermelon/Watermelon_Base_Color.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Watermelon/Watermelon_Height.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Watermelon/Watermelon_Metallic.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Watermelon/Watermelon_Normal.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Watermelon/Watermelon_Roughness.jpg",
     ],
-    "Wooden_Planks": [
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Wooden_Planks/Thumbnail.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Wooden_Planks/wooden_planks_Base_Color.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Wooden_Planks/wooden_planks_Metallic.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Wooden_Planks/wooden_planks_Normal.jpg",
-        "https://labs.sketchfab.com/experiments/material-showcase/materials/Wooden_Planks/wooden_planks_Roughness.jpg"
-    ]
+    Wooden_Planks: [
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Wooden_Planks/Thumbnail.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Wooden_Planks/wooden_planks_Base_Color.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Wooden_Planks/wooden_planks_Metallic.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Wooden_Planks/wooden_planks_Normal.jpg",
+      "https://klaasnienhuis.github.io/experiments/material-showcase/materials/Wooden_Planks/wooden_planks_Roughness.jpg",
+    ],
   };
   var domain = window.location.href.replace("index.html", "");
 
@@ -134,7 +134,7 @@
 
   function renderMaterialList() {
     var out = "";
-    Object.keys(materials).forEach(function(materialName) {
+    Object.keys(materials).forEach(function (materialName) {
       if (materials[materialName].thumbnail) {
         out +=
           '<li class="material" data-material="' +
@@ -166,12 +166,12 @@
 
   function fetchMaterials() {
     var url = "materials/materials.xml";
-    Object.keys(materials).forEach(function(materialName) {
+    Object.keys(materials).forEach(function (materialName) {
       var files = materials[materialName];
       var urlParams = [];
       var hasAO = false;
       var hasNormal = false;
-      files.forEach(function(file) {
+      files.forEach(function (file) {
         if (file.match("Base_Color")) {
           urlParams.push("material_diffuse=" + file);
           return;
@@ -220,13 +220,15 @@
     renderMaterialList();
   }
 
-  $(function() {
-    $(".materials").on("click", ".material", function(e) {
+  $(function () {
+    $(".materials").on("click", ".material", function (e) {
       e.preventDefault();
       var $target = $(e.currentTarget);
       var materialId = $target.attr("data-material");
       applyMaterial(materialId);
-      $(".material-selected").html("<h1>" + materialId.replaceAll('_', ' ') + "</h1>");
+      $(".material-selected").html(
+        "<h1>" + materialId.replaceAll("_", " ") + "</h1>"
+      );
       onLoadingStart();
       setTimeout(onLoadingStop, 1000);
     });
