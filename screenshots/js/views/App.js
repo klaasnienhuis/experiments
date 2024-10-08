@@ -88,11 +88,12 @@ var AppView = Backbone.View.extend({
       }
       this.resizeFrame();
     }
+
     this.client.init(urlid, {
       camera: 0,
-      //   image_compression: 0,
-      //   internal: 1,
-      //   overrideDevicePixelRatio: 1,
+      // image_compression: 0,
+      // internal: 1,
+      // overrideDevicePixelRatio: 1,
       transparent: isTransparent ? 1 : 0,
       success: function onSuccess(api) {
         this.api = api;
@@ -133,7 +134,6 @@ var AppView = Backbone.View.extend({
   },
 
   onViewerReady: function () {
-    console.log("Ready");
     this._sceneView.setApi(this.api);
     this._screenshotView.setApi(this.api);
     this.enableControls();

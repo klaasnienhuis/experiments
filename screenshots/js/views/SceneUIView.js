@@ -6,6 +6,7 @@ var SceneUIView = Backbone.View.extend( {
 
     events: {
         'change input[name="postprocessing"]': 'onPostProcessingChange',
+        'change input[name="vignette"]': 'onVignetteChange',
         'change #settings-fov': 'onFovChange',
         'click [data-action="exportCamera"]': 'onExportCameraClick',
         'click [data-action="importCamera"]': 'onImportCameraClick',
@@ -31,6 +32,18 @@ var SceneUIView = Backbone.View.extend( {
         this.api.setPostProcessing( {
             enable: $( e.target ).is( ':checked' ),
         } );
+    },
+
+    onVignetteChange: function ( e ) {
+
+        if ( !this.api ) {
+            return;
+        }
+
+        this.api.setPostProcessing( {
+            vignetteEnable: $( e.target ).is( ':checked' ),
+        });
+
     },
 
     onFovChange: function ( e ) {
@@ -91,7 +104,12 @@ var SceneUIView = Backbone.View.extend( {
             if ( settings.enable ) {
                 $( 'input[name="postprocessing"]' ).prop( 'checked', settings.enable );
             }
+            if ( settings.vignetteEnable ) {
+                $( 'input[name="vignette"]' ).prop( 'checked', settings.vignetteEnable );
+            }
         } );
+
+
 
         this.api.getSceneGraph( function ( err, result ) {
 
@@ -101,6 +119,15 @@ var SceneUIView = Backbone.View.extend( {
             }
 
             console.log( result );
+
+            function escapeHtml(html) {
+                return html
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            }
 
             function renderChildren( node ) {
                 var nodes = [];
@@ -124,7 +151,7 @@ var SceneUIView = Backbone.View.extend( {
 
                 out += '<i class="icon ' + icons[ node.type ] + '" title="' + node.type + '"></i> ';
 
-                out += '<span>' + ( node.name ? node.name : ( '(' + node.type + ')' ) ) + '</span>';
+                out += '<span>' + ( node.name ? escapeHtml(node.name) : ( '(' + node.type + ')' ) ) + '</span>';
 
                 if ( node.children && node.children.length ) {
                     out += renderChildren( node );

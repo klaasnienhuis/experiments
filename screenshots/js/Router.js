@@ -41,6 +41,15 @@ var Router = Backbone.Router.extend({
 
     screenshot: function(urlid, queryString) {
 
+        var uidRegex = /^[0-9a-zA-Z]{27,32}$/;
+
+        if (!urlid.match(uidRegex)) {
+            window.console.log('Invalid model UID in URL hash:', urlid);
+            return;
+        }
+
+        window.console.log('Loading model UID:', urlid);
+
         var params = {
             width: 1920,
             height: 1080,
